@@ -29,7 +29,7 @@ angular.module('starter.controllers', [])
     .controller('ReflectionInsertCtrl', function ($scope, ReflectHttpAPI) {
         //DEFAULTS
         $scope.direction = 1; //positive reflection
-        $scope.date = new Date().toString(); //date = today
+        $scope.date = new Date(); //date = today
 
         //GETTER SETTER
         $scope.setDirection = function(num){
@@ -46,7 +46,12 @@ angular.module('starter.controllers', [])
                 $scope.dates = [];
                 for(var i=0; i<4; i++){
                     $scope.dates[i] = new Date();
-                    if(i>0){
+
+                    if(i==0){
+                        $scope.date = $scope.dates[i];
+                    }
+
+                    else{
                         $scope.dates[i].setDate($scope.dates[i-1].getDate() -1 );
                     }
                 }
@@ -58,7 +63,7 @@ angular.module('starter.controllers', [])
             if (!$scope.dates) {
                 $scope.getDate(0); //instantiation lazy
             }
-            $scope.date = $scope.dates[idx].toString();
+            $scope.date = $scope.dates[idx];
         };
 
         //FORM HANDLER
@@ -69,7 +74,7 @@ angular.module('starter.controllers', [])
                 reflection.direction = -1;
 
             var newItem = ReflectHttpAPI;
-            newItem.save({body: reflection.body, direction: $scope.direction, date: $scope.date},
+            newItem.save({body: reflection.body, direction: $scope.direction, date: $scope.date.toString()},
                 function(value, responseHeaders){
                     console.log('success saving');
                     reflection.body = "";
@@ -93,6 +98,11 @@ angular.module('starter.controllers', [])
         //Helper to style currently selected direction
         $scope.styleDirection = function (idx) {
             if ($scope.direction != idx) return 'button-outline';
+            else return '';
+        };
+
+        $scope.styleDate = function (idx) {
+            if ($scope.date.valueOf() == $scope.getDate(idx)) return 'active';
             else return '';
         };
     });

@@ -8,10 +8,10 @@
 
             <!--  Date picker generated from last 4 days -->
             <div class="button-bar">
-                <a class="button" ng-click="setDate(3)">{{getDate(3) | date:'dd.MM'}}</a>
-                <a class="button" ng-click="setDate(2)">{{getDate(2) | date:'dd.MM'}}</a>
-                <a class="button" ng-click="setDate(1)">{{getDate(1) | date:'dd.MM'}}</a>
-                <a class="button" ng-click="setDate(0)">{{getDate(0) | date:'dd.MM'}}</a>
+                <a class="button {{styleDate(3)}}" ng-click="setDate(3)">{{getDate(3) | date:'dd.MM'}}</a>
+                <a class="button {{styleDate(2)}}" ng-click="setDate(2)">{{getDate(2) | date:'dd.MM'}}</a>
+                <a class="button {{styleDate(1)}}" ng-click="setDate(1)">{{getDate(1) | date:'dd.MM'}}</a>
+                <a class="button {{styleDate(0)}}" ng-click="setDate(0)">{{getDate(0) | date:'dd.MM'}}</a>
             </div>
             <p></p>
             <!--  Direction -->
@@ -22,7 +22,7 @@
             <p></p>
             <!--  Comments -->
             <label class="item item-input">
-                <textarea placeholder="Reflection" ng-model="reflection.body" rows="9"> </textarea>
+                <textarea placeholder="Reflection" ng-model="reflection.body" rows="10"> </textarea>
             </label>
         </div>
         <div>
