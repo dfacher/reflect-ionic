@@ -1,0 +1,21 @@
+
+<!-- 
+  Create tabs with an icon and label, using the tabs-positive style. 
+  Each tab's child <ion-nav-view> directive will have its own 
+  navigation history that also transitions its views in and out.
+-->
+<ion-tabs tabs-style="tabs-icon-top" tabs-type="tabs-default">
+
+    <!-- Insert -->
+    <ion-tab title="Insert" icon="icon ion-compose" href="#/tab/insert">
+        <ion-nav-view name="insert-tab"></ion-nav-view>
+    </ion-tab>
+
+
+    <!-- View -->
+    <ion-tab title="Reflections" icon="ion-ios7-bookmarks" href="#/tab/reflections">
+        <ion-nav-view name="reflections-tab"></ion-nav-view>
+    </ion-tab>
+
+
+</ion-tabs>

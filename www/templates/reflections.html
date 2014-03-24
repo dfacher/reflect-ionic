@@ -1,0 +1,13 @@
+<!--
+  This template loads for the 'tab.reflections' state (app.js)
+-->
+<ion-view title="My reflections">
+    <ion-content has-header="true" padding="true" has-footer="false" scroll="true">
+        <div class="list card">
+            <div ng-repeat="reflection in reflections | orderBy:'date':true" class="item item-text-wrap ">
+                <p class="{{parseDirection(reflection.direction)}}">{{reflection.body}}</p>
+                <p class="dayText">{{parseDate(reflection.date) | date:'dd-MMM-yyyy'}}</p>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

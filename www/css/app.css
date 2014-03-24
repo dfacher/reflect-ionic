@@ -1,0 +1,21 @@
+/* Your app's CSS, go crazy, make it your own */
+
+.ionic-logo {
+  display: block;
+  margin: 15px auto;
+  width: 96px;
+  height: 96px;
+}
+
+p.positiveReflection {
+    color: #48b354;
+}
+
+p.negativeReflection {
+    color: #cb5f74;
+}
+
+p.dayText {
+    color: #b4b4b4;
+    font-size: 12px;
+}
