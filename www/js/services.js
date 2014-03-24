@@ -1,7 +1,7 @@
 angular.module('starter.services', [])
 
 /**
- * A simple example service that returns some data.
+ * A simple service that returns some data.
  */
 .factory('ReflectHttpAPI', ['$resource', function($resource){
     return $resource('http://logg.herokuapp.com/api/:path', {}, { //http://logg.herokuapp.com/

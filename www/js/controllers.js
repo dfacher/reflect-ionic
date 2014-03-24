@@ -1,8 +1,9 @@
 angular.module('starter.controllers', [])
 
 
-    .controller('ReflectionIndexCtrl', function($scope, ReflectHttpAPI, $ionicModal, $resource, $http) {
+    .controller('ReflectionIndexCtrl', function ($scope, ReflectHttpAPI) {
 
+        //Database connection and object handler for reflection list
         $scope.reflectionDb = ReflectHttpAPI.reflections();
         $scope.reflectionDb.$promise.then(function(data){
             $scope.reflections = data.json;
@@ -12,6 +13,7 @@ angular.module('starter.controllers', [])
             return new Date(dateString);
         };
 
+        //Helper to convert direction into class tag for styling
         $scope.parseDirection = function(directionString){
             if(angular.isNumber(directionString) && directionString === 1)
                 return 'positiveReflection';
@@ -23,13 +25,11 @@ angular.module('starter.controllers', [])
     })
 
 
- // Controller for adding new reflection element
-    .controller('ReflectionInsertCtrl', function($scope, ReflectHttpAPI, $ionicModal, $resource, $http) {
+    //Controller for adding new reflection element
+    .controller('ReflectionInsertCtrl', function ($scope, ReflectHttpAPI) {
         //DEFAULTS
-        $scope.direction = 1;
-        $scope.dates = [];
-        $scope.date = $scope.dates[0];
-
+        $scope.direction = 1; //positive reflection
+        $scope.date = new Date().toString(); //date = today
 
         //GETTER SETTER
         $scope.setDirection = function(num){
@@ -38,10 +38,12 @@ angular.module('starter.controllers', [])
             }
 
             $scope.direction = num;
-        }
+        };
 
         $scope.getDate = function(idx){
-            if($scope.dates.length == 0){
+            //lazy fetch
+            if (!$scope.dates) {
+                $scope.dates = [];
                 for(var i=0; i<4; i++){
                     $scope.dates[i] = new Date();
                     if(i>0){
@@ -50,19 +52,16 @@ angular.module('starter.controllers', [])
                 }
             }
             return $scope.dates[idx].valueOf();
-        }
+        };
 
         $scope.setDate = function(idx){
+            if (!$scope.dates) {
+                $scope.getDate(0); //instantiation lazy
+            }
             $scope.date = $scope.dates[idx].toString();
-        }
+        };
 
-        //STYLERS
-        $scope.styleDirection = function(idx){
-            if ($scope.direction != idx) return 'button-outline';
-            else return '';
-        }
-
-        // Called when the form is submitted
+        //FORM HANDLER
         $scope.createReflection = function(reflection) {
             if(reflection.positive === true)
                 reflection.direction = 1;
@@ -81,7 +80,8 @@ angular.module('starter.controllers', [])
             );
         };
 
-        // TAG REGEX
+        //HELPERS
+        //Helper to parse tags from reflection body
         $scope.genTags = function(text){
             if(text && angular.isString(text)){
                 var pattern = /#\w+/g;
@@ -89,5 +89,11 @@ angular.module('starter.controllers', [])
             }
 
         };
-    })
+
+        //Helper to style currently selected direction
+        $scope.styleDirection = function (idx) {
+            if ($scope.direction != idx) return 'button-outline';
+            else return '';
+        };
+    });
 
